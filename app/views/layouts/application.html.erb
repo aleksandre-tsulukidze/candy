@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Candyio</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body class="bg-main-background h-screen text-white" >
+    <div class="flex w-full mb-15">
+      <div class="text-white font-kreadon text-2xl font-bold leading-none py-5 pl-4">
+        Candy
+      </div>
+      <div class="w-full py-5 border-b border-solid border-input-border bg-gradient-main bg-clip-text text-transparent font-kreadon text-2xl font-bold leading-none">.ai</div>
+    </div>
+    <div class=" w-full flex justify-center items-center">
+      <%= yield %>
+    </div>
+      
+  </body>
+</html>

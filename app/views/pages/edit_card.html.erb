@@ -1,0 +1,165 @@
+<% checked_svg_path = asset_path('checked.svg') %>   
+<div class="w-98" data-controller="form">
+    <h1 class="w-full mb-5 text-center text-white text-4xl font-semibold leading-snug font-poppins">New Card</h1>
+    <div data-form-target="edit" class="w-full p-6 h-100 rounded-lg border border-modal-border bg-modal-background">    
+        <%= form_with url: '#', local: true, data: { action: "submit->form#update", edit_target: "edit" } do |form| %>
+
+        <%= form.label :address, 'Address', class: 'block text-modal-text text-sm font-bold mb-4' %>
+        <div class="flex gap-6 mb-6" >
+            <div class="w-full relative">
+                <%= form.select :country, ['Option 1', 'Option 2', 'Option 3'], { prompt: :Country ,  selected: local_assigns[:country]}, id: "country-select", class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] px-[15px] py-[12px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+                <div id="arrow1" class="absolute right-0 top-0 mt-2 mr-2">
+                    <%= image_tag("inputArrow.svg", alt: "icon") %>
+                </div>
+            </div>
+
+            <div class="w-full relative">
+                <%= form.select :stateOfRegion, ['Option 1', 'Option 2', 'Option 3'], { prompt: 'State of Region', selected: local_assigns[:stateOfRegion] }, id: "stateOfRegion-select", class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] px-[15px] py-[12px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+                <div id="arrow2" class="absolute right-0 top-0 mt-2 mr-2">
+                    <%= image_tag("inputArrow.svg", alt: "icon") %>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-6" >
+            <%= form.text_field :street, placeholder: "Street", value: local_assigns[:street], class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] p-[15px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+        </div>
+
+        <div class="flex gap-6 mb-8" >
+            <div class="w-full">
+              <%= form.text_field :city, placeholder: 'City', value: local_assigns[:city],  class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] p-[15px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+            </div>
+
+            <div class="w-full">
+              <%= form.text_field :zipCode, placeholder: 'Zip Code', value: local_assigns[:zipCode], class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] p-[15px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+            </div>
+        </div>
+
+        <%= form.label :cardDetails, 'Card Details', class: 'block text-modal-text text-sm font-bold mb-4' %>
+
+        <div class="flex gap-6 mb-6" >
+            <div class="w-full">
+              <%= form.email_field :email, placeholder: 'E-mail address', value: local_assigns[:email], class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] p-[15px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+            </div>
+
+            <div class="w-full">
+              <%= form.text_field :name, placeholder: 'Cardholder Name', value: local_assigns[:name], class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] p-[15px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+            </div>
+        </div>
+
+
+        <div class="relative">
+            <%= form.text_field :cardNumber, placeholder: '1234 1234 1234 1234', value: local_assigns[:number], class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-t-lg border-input-border bg-input-background text-input-text w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline' %>
+            <span class="absolute gap-1 inset-y-0 right-[0.9375rem] flex items-center pl-3">
+                <%= image_tag("inputVisa.svg", alt: "icon", class: "h-6 w-4") %>
+                <%= image_tag("inputDinersClub.svg", alt: "icon", class: "h-6 w-4") %>
+                <%= image_tag("inputAmex.svg", alt: "icon", class: "h-6 w-4") %>
+                <%= image_tag("inputMastercard.svg", alt: "icon", class: "h-6 w-4") %>
+            </span>
+        </div>
+
+        <div class="flex gap-0 mb-6" >
+            <div class="w-full">
+              <%= form.text_field :mmyy, placeholder: 'MM/YY', value: local_assigns[:mmyy], class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-bl-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] p-[15px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+            </div>
+
+            <div class="w-full">
+              <%= form.text_field :cvs, placeholder: 'CVC', value: local_assigns[:cvs], class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-br-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] p-[15px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
+            </div>
+        </div>
+
+
+        <div class="mb-4 flex gap-1.5 align-center">
+            <%= form.check_box :checked, { checked: local_assigns[:checked] }, class: 'mr-2 align-middle' %>
+            <%= form.label :checkedLabel, 'Check here to confirm that you are at least 18 years old and of legal age where you live', class: 'align-middle font-poppins text-sm font-medium leading-5' %>
+        </div>
+
+        <div class="mb-4 flex gap-6 align-center">
+            <%= form.button 'Cancel', data: {contoller: 'form', action: 'click->form#goHome'}, class: 'font-poppins text-sm font-semibold leading-5 border px-4 py-3 rounded-[10px] w-full text-main-pink border-main-pink ' %>
+            <%= form.submit 'Save', class: 'bg-gradient-main font-poppins text-sm font-semibold leading-5 w-full px-4 px-3 rounded-[10px]  '%>
+        </div>
+
+        <% end %>
+    </div>
+    <%= link_to 'Back home', root_path %>
+<script>
+
+  var checkedSvgPath = "<%= checked_svg_path %>";
+  var checkboxes = document.querySelectorAll('[type="checkbox"]');
+  checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      if (checkbox.checked) {
+        checkbox.style.background = 'url(' + checkedSvgPath + ') no-repeat center center';
+      } else {
+        checkbox.style.background = '';
+      }
+    });
+  });
+
+  var isSelectOpen1 = false;
+  var isSelectOpen2 = false;
+  var selectElement1 = document.querySelector('#country-select');
+  var selectElement2 = document.querySelector('#stateOfRegion-select');
+  var arrow1 = document.querySelector('#arrow1');
+  var arrow2 = document.querySelector('#arrow2');
+
+  selectElement1.addEventListener('mousedown', function() {
+    isSelectOpen1 = !isSelectOpen1;
+    if (isSelectOpen1) {
+      arrow1.style.transform = 'rotate(180deg)';
+    } else {
+      arrow1.style.transform = 'rotate(0deg)';
+    }
+  });
+
+  selectElement2.addEventListener('mousedown', function() {
+    isSelectOpen2 = !isSelectOpen2;
+
+    if (isSelectOpen2) {
+      arrow2.style.transform = 'rotate(180deg)';
+    } else {
+      arrow2.style.transform = 'rotate(0deg)';
+    }
+  });
+
+</script>
+<style>
+[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: relative;
+  width: 22px;
+  min-width: 22px;
+  height: 22px;
+  border: 1px solid #F97187;
+  border-radius: 3px;
+  cursor: pointer;
+  
+}
+
+[type="checkbox"]:not(:checked):after,
+[type="checkbox"]:checked:after {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+  
+
+[type="checkbox"]:not(:checked):after {
+  opacity: 0;
+}
+
+[type="checkbox"]:checked:after {
+  opacity: 1;
+}
+</style>
+</div>

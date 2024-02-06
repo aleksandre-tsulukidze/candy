@@ -1,0 +1,29 @@
+<div class="customCard w-full relative h-60 mb-7 rounded-lg border border-popup-stroke bg-gradient-main-card shadow-lg"> 
+    <div>
+        <%= content_tag(:h1, local_assigns[:name], class: "absolute top-6 left-6 text-white font-poppins text-2xl font-bold leading-snug") %>
+    </div>
+    <div>
+    <%= content_tag(:h1, "", ) %>
+    <%= image_tag "dots.svg", data: {contoller: 'home', action: 'click->home#toggleModal'}, class:"absolute top-3 right-3 cursor-pointer", id: "dot"%>
+    </div>
+
+    <div>
+        <%= content_tag(:p, local_assigns[:number], class: "absolute bottom-6 left-6 text-modal-text font-poppins text-xl font-semibold leading-7") %>
+    </div>
+
+    <div>
+    <%= content_tag(:p, "", ) %>
+    <%= image_tag local_assigns[:isMastercard] ? "mastercard.svg" : "visa.svg", class: "w-24 h-9 absolute right-0 bottom-6" %>
+    </div>
+
+    <div class="hidden absolute top-10 -right-16 bg-modal-background rounded-lg border border-solid border-modal-border" id="modal">
+        <div data-contoller="home" data-action="click->home#edit" data-item-id="<%= id %>"  class="cursor-pointer border-b border-modal-border py-2.5 px-4 flex justify-start gap-2" >
+            <%= image_tag("edit.svg", alt: "icon", ) %>
+            edit
+        </div>
+        <div data-contoller="home" data-action="click->home#delete" data-item-id="<%= id %>" class="cursor-pointer flex justify-start gap-2 py-2.5 px-4" >  
+            <%= image_tag("delete.svg", alt: "icon", ) %>
+            Delete
+        </div>
+    </div>
+</div>
