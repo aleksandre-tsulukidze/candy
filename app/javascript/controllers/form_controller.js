@@ -2,9 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="home"
 export default class extends Controller {
-  static targets = ["form", "edit"]
+  static targets = ["form", "edit", "country", "stateOfRegion", "arrow1", "arrow2", "checkbox",]
 
   connect() {
+    this.isSelectOpen1 = false;
+    this.isSelectOpen2 = false;
+    this.checkedSvgPath = this.data.get("checked")
+    this.checkboxTargets.forEach(checkbox => {
+      checkbox.addEventListener('change', this.toggleCheckbox.bind(this))
+    })
+
     this.load()
   }
 
@@ -100,5 +107,26 @@ export default class extends Controller {
   goHome(event) {
     event.preventDefault()
     window.location.href = '/';
+  }
+
+  toggleSelect(event) {
+    event.preventDefault()  
+
+    if (event.target === this.countryTarget) {
+      this.isSelectOpen1 = !this.isSelectOpen1
+      this.arrow1Target.style.transform = this.isSelectOpen1 ? 'rotate(180deg)' : 'rotate(0deg)'
+    } else if (event.target === this.stateOfRegionTarget) {
+      this.isSelectOpen2 = !this.isSelectOpen2
+      this.arrow2Target.style.transform = this.isSelectOpen2 ? 'rotate(180deg)' : 'rotate(0deg)'
+    }
+  }
+
+  toggleCheckbox(event) {
+    event.preventDefault()
+    if (event.target.checked) {
+      event.target.style.background = 'url(' + this.checkedSvgPath + ') no-repeat center center'
+    } else {
+      event.target.style.background = ''
+    }
   }
 }

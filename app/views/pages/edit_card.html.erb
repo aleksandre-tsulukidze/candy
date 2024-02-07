@@ -1,5 +1,4 @@
-<% checked_svg_path = asset_path('checked.svg') %>   
-<div class="w-98" data-controller="form">
+<div class="w-98" data-controller="form" data-form-checked="<%= asset_path('checked.svg') %>">
     <h1 class="w-full mb-5 text-center text-white text-4xl font-semibold leading-snug font-poppins">New Card</h1>
     <div data-form-target="edit" class="w-full p-6 h-100 rounded-lg border border-modal-border bg-modal-background">    
         <%= form_with url: '#', local: true, data: { action: "submit->form#update", edit_target: "edit" } do |form| %>
@@ -7,15 +6,15 @@
         <%= form.label :address, 'Address', class: 'block text-modal-text text-sm font-bold mb-4' %>
         <div class="flex gap-6 mb-6" >
             <div class="w-full relative">
-                <%= form.select :country, ['Option 1', 'Option 2', 'Option 3'], { prompt: :Country ,  selected: local_assigns[:country]}, id: "country-select", class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] px-[15px] py-[12px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
-                <div id="arrow1" class="absolute right-0 top-0 mt-2 mr-2">
+                <%= form.select :country, ['Option 1', 'Option 2', 'Option 3'], { prompt: :Country ,  selected: local_assigns[:country]}, {id: "country-select", class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] px-[15px] py-[12px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline', data: { action: "click->form#toggleSelect", form_target: "country" } } %>
+                <div data-form-target="arrow1" id="arrow1" class="absolute right-0 top-0 mt-2 mr-2">
                     <%= image_tag("inputArrow.svg", alt: "icon") %>
                 </div>
             </div>
 
             <div class="w-full relative">
-                <%= form.select :stateOfRegion, ['Option 1', 'Option 2', 'Option 3'], { prompt: 'State of Region', selected: local_assigns[:stateOfRegion] }, id: "stateOfRegion-select", class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] px-[15px] py-[12px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline' %>
-                <div id="arrow2" class="absolute right-0 top-0 mt-2 mr-2">
+                <%= form.select :stateOfRegion, ['Option 1', 'Option 2', 'Option 3'], { prompt: 'State of Region', selected: local_assigns[:stateOfRegion] }, {id: "stateOfRegion-select", class: 'text-input-text font-poppins text-sm font-normal font-semibold leading-none border shadow appearance-none rounded-[10px] border-input-border bg-input-background text-input-text w-full h-[40px] px-[15px] py-[12px] flex items-center gap-[10px] flex-shrink-0 focus:outline-none focus:shadow-outline', data: { action: "click->form#toggleSelect", form_target: "stateOfRegion" }  }%>
+                <div data-form-target="arrow2" id="arrow2" class="absolute right-0 top-0 mt-2 mr-2">
                     <%= image_tag("inputArrow.svg", alt: "icon") %>
                 </div>
             </div>
@@ -70,7 +69,7 @@
 
 
         <div class="mb-4 flex gap-1.5 align-center">
-            <%= form.check_box :checked, { checked: local_assigns[:checked] }, class: 'mr-2 align-middle' %>
+            <%= form.check_box :checked, { class: 'mr-2 align-middle', data: { form_target: "checkbox" }, checked: local_assigns[:checked] } %>
             <%= form.label :checkedLabel, 'Check here to confirm that you are at least 18 years old and of legal age where you live', class: 'align-middle font-poppins text-sm font-medium leading-5' %>
         </div>
 
@@ -81,48 +80,6 @@
 
         <% end %>
     </div>
-    <%= link_to 'Back home', root_path %>
-<script>
-
-  var checkedSvgPath = "<%= checked_svg_path %>";
-  var checkboxes = document.querySelectorAll('[type="checkbox"]');
-  checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('change', function() {
-      if (checkbox.checked) {
-        checkbox.style.background = 'url(' + checkedSvgPath + ') no-repeat center center';
-      } else {
-        checkbox.style.background = '';
-      }
-    });
-  });
-
-  var isSelectOpen1 = false;
-  var isSelectOpen2 = false;
-  var selectElement1 = document.querySelector('#country-select');
-  var selectElement2 = document.querySelector('#stateOfRegion-select');
-  var arrow1 = document.querySelector('#arrow1');
-  var arrow2 = document.querySelector('#arrow2');
-
-  selectElement1.addEventListener('mousedown', function() {
-    isSelectOpen1 = !isSelectOpen1;
-    if (isSelectOpen1) {
-      arrow1.style.transform = 'rotate(180deg)';
-    } else {
-      arrow1.style.transform = 'rotate(0deg)';
-    }
-  });
-
-  selectElement2.addEventListener('mousedown', function() {
-    isSelectOpen2 = !isSelectOpen2;
-
-    if (isSelectOpen2) {
-      arrow2.style.transform = 'rotate(180deg)';
-    } else {
-      arrow2.style.transform = 'rotate(0deg)';
-    }
-  });
-
-</script>
 <style>
 [type="checkbox"] {
   appearance: none;
