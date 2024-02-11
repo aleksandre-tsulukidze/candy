@@ -12,8 +12,7 @@
     </div>
 
     <div>
-    <%= content_tag(:p, "", ) %>
-    <%= image_tag local_assigns[:isMastercard] ? "mastercard.svg" : "visa.svg", class: "w-24 h-9 absolute right-0 bottom-6" %>
+        <%= image_tag local_assigns[:isMastercard] === 'true' ? "mastercard.svg" : "visa.svg", class: "w-24 h-9 absolute right-3 bottom-6" %>
     </div>
 
     <div class="hidden absolute top-10 -right-16 bg-modal-background rounded-lg border border-solid border-modal-border" id="modal">

@@ -14,7 +14,7 @@ export default class extends Controller {
 
     // Use map to create an array of fetch promises
     const fetchPromises = cards.map(card => {
-      return fetch(`/pages/new_card?checked=${card.checked}&cardNumber=${card.cardNumber}&name=${card.name}&id=${card.id}`)
+      return fetch(`/pages/new_card?isMastercard=${card.isMastercard}&cardNumber=${card.cardNumber}&name=${card.name}&id=${card.id}`)
         .then(response => response.text())
     })
 
@@ -40,7 +40,7 @@ export default class extends Controller {
     const card = cards.find(card => card.id == itemId)
 
     // Navigate to the edit page
-    window.location.href = `/pages/edit_card/${card.id}?checked=${card.checked}&cardNumber=${card.cardNumber}&name=${card.name}&country=${card.country}&stateOfRegion=${card.stateOfRegion}&street=${card.street}&city=${card.city}&zipCode=${card.zipCode}&email=${card.email}&mmyy=${card.mmyy}&cvs=${card.cvs}`;
+    window.location.href = `/pages/edit_card/${card.id}`;
   }
 
   // delete data to local storage
