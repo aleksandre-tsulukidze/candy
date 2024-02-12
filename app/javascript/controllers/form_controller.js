@@ -238,7 +238,6 @@ export default class extends Controller {
   }
 
   checkEmail() {
-    console.log(this.emailTarget.validity);
     this.validationController.emailValidate()
   }
 
