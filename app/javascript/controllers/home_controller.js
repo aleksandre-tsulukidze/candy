@@ -57,5 +57,14 @@ export default class extends Controller {
     event.preventDefault()
     const modal = event.currentTarget.closest('.customCard').querySelector('#modal');
     modal.classList.toggle('hidden')
+
+    if (screen.width < 450) {
+      modal.classList.remove('-right-16')
+      modal.classList.add('right-3')
+    } else {
+      modal.classList.add('-right-16')
+      modal.classList.remove('right-3')
+
+    }
   }
 }

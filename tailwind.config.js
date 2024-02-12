@@ -27,6 +27,9 @@ module.exports = {
         "60" : "15.25rem",
         "100" : "37.625rem"
       },
+      screens: {
+        '450': '450px'
+      }
     },
     backgroundImage: theme => ({
       'gradient-main': 'linear-gradient(268deg, #FC768A -14.8%, #E65073 102.08%)',

@@ -1,4 +1,4 @@
-<div class="w-98" data-controller="form" data-form-checked="<%= asset_path('checked.svg') %>" >
+<div class="w-98 w-98 px-5 450:px-0" data-controller="form" data-form-checked="<%= asset_path('checked.svg') %>" >
     <h1 class="w-full mb-5 text-center text-white text-4xl font-semibold leading-snug font-poppins" data-form-target="title">New Card</h1>
     <div data-form-target="form" class="w-full p-6 h-100 rounded-lg border border-modal-border bg-modal-background">    
     <%= form_with url: '#', local: true, data: { action: "submit->form#add", form_target: "form" } do |form| %>
