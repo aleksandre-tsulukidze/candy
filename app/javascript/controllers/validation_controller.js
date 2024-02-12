@@ -112,7 +112,6 @@ export default class Validation {
     }
 
     emailValidate() {
-        console.log(this.emailTarget.checkValidity())
         if (!this.emailTarget.checkValidity()) {
             this.emailTarget.reportValidity();
             this.isValidEmail = false;
