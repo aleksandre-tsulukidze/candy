@@ -5,16 +5,27 @@ import Validation from "./validation_controller";
 export default class extends Controller {
   static targets = ["form", "title", "country", "stateOfRegion", "arrow1", "arrow2", "street", "city", "zipCode", "email", "name", 'cardNumber', "mmyy", "cvc", "checkbox", "submitButton"]
 
+  
   connect() {
     this.isSelectOpen1 = false;
     this.isSelectOpen2 = false;
     this.checked = this.data.get("default") === 'true'
     this.checkedSvgPath = this.data.get("checked")
+    this.currentCountry = ''
 
     this.checkboxTarget.addEventListener('change', this.toggleCheckbox.bind(this))
   
     this.validationController = new Validation(this.streetTarget, this.cityTarget, this.zipCodeTarget, this.emailTarget, this.nameTarget, this.cardNumberTarget, this.mmyyTarget, this.cvcTarget, this.countryTarget, this.stateOfRegionTarget)
-    this.load()
+
+    fetch('http://ip-api.com/json')
+      .then(response => response.json())
+      .then(data => {
+        this.currentCountry = data.country
+        this.load()
+      })
+      .catch(() => {
+        console.log('Unable to get location');
+      }); 
   }
 
   load() {
@@ -26,18 +37,10 @@ export default class extends Controller {
 
     const submitButton = this.submitButtonTarget;
 
-    fetch('http://ip-api.com/json')
-    .then(response => response.json())
-    .then(data => {
-      let country = data.country;
-      let option = document.createElement('option');
-      option.text = country;
-      option.value = country;
-      this.stateOfRegionTarget.add(option, this.stateOfRegionTarget[1]);
-    })
-    .catch(() => {
-      console.log('Unable to get location');
-    });
+    let option = document.createElement('option');
+    option.text = this.currentCountry;
+    option.value = this.currentCountry;
+    this.stateOfRegionTarget.add(option, this.stateOfRegionTarget[1]);
 
     if (card && this.formTarget && this.validationController) {
       this.titleTarget.textContent = 'Edit Card';
@@ -141,7 +144,6 @@ export default class extends Controller {
     const pathParts = path.split('/');
     const cardId = pathParts[pathParts.length - 1];
     
-    
     const newCard = {
       country,
       stateOfRegion,
@@ -236,6 +238,7 @@ export default class extends Controller {
   }
 
   checkEmail() {
+    console.log(this.emailTarget.validity);
     this.validationController.emailValidate()
   }
 

@@ -112,16 +112,12 @@ export default class Validation {
     }
 
     emailValidate() {
-        if (!this.emailTarget.validity.valid) {
-            if (this.emailTarget.value.trim() === '' || !this.emailTarget.validity.valid) {
-                this.emailTarget.setCustomValidity('Email is required');
-                this.emailTarget.setCustomValidity('Please enter a valid email address');
-                this.emailTarget.reportValidity();
-            }
+        console.log(this.emailTarget.checkValidity())
+        if (!this.emailTarget.checkValidity()) {
+            this.emailTarget.reportValidity();
             this.isValidEmail = false;
             this.emailTarget.style.border = '1px solid red';
         } else {
-            this.emailTarget.setCustomValidity('');
             this.isValidEmail = true;
             this.emailTarget.style.border = '1px solid #363636';
         }
